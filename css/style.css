@@ -1,0 +1,221 @@
+
+/* =================================
+   EVENTORA - DAY 1
+   Basic Website Styling
+================================= */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f8fafc;
+    color: #111827;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* NAVIGATION BAR */
+
+header {
+    background: white;
+    padding: 20px 6%;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #765cff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #374151;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #765cff;
+}
+
+
+/* HERO SECTION */
+
+.hero {
+    padding: 110px 6%;
+    text-align: center;
+
+    background: linear-gradient(
+        120deg,
+        #ede9fe,
+        #fce7f3
+    );
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: auto;
+}
+
+.hero-tag {
+    display: inline-block;
+    background: white;
+    color: #765cff;
+    padding: 12px 22px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 55px;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    display: block;
+    color: #a34ee8;
+}
+
+.hero p {
+    color: #526078;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hero-button {
+    display: inline-block;
+    background: linear-gradient(
+        90deg,
+        #765cff,
+        #e83eb1
+    );
+
+    color: white;
+    padding: 16px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+
+/* STATISTICS */
+
+.statistics {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.stat-card {
+    background: white;
+    padding: 30px;
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px #e2e8f0;
+}
+
+.stat-card h2 {
+    color: #765cff;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+
+/* EVENTS SECTION */
+
+.events {
+    text-align: center;
+    padding: 70px 5%;
+    background: white;
+}
+
+.events h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.events p {
+    color: #64748b;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+footer h3 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+footer p {
+    margin: 10px 0;
+    color: #cbd5e1;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 70px 5%;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .statistics {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
