@@ -139,23 +139,6 @@ Responsive-Event-Management-Website_Final/
 5. Right-click and select **Open with Live Server**.
 6. The Eventora website will open in your browser.
 
-### Method 2: Using Python
-
-Open the VS Code terminal inside the project folder.
-
-Execute:
-
-```bash
-python -m http.server 5500
-```
-
-Open your browser and visit:
-
-```text
-http://localhost:5500
-```
-
----
 
 ## ☁️ GitHub Repository
 
@@ -167,15 +150,7 @@ http://localhost:5500
 
 [github.com/arkapoldeb](https://github.com/arkapoldeb)
 
-### Push Project Updates to GitHub
 
-Use the following commands in the VS Code terminal:
-
-```bash
-git add .
-git commit -m "update: improve Eventora website"
-git push origin main
-```
 
 ---
 
@@ -248,7 +223,6 @@ This project also demonstrates practical knowledge of:
 
 **Development Tools:** Visual Studio Code, Git & GitHub
 
-**License:** MIT License
 
 ---
 
