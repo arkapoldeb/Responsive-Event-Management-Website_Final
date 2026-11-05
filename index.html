@@ -414,7 +414,13 @@
             <li><a href="#about">About</a></li>
             <li><a href="booking.html" class="nav-button">Book Tickets</a></li>
         </ul>
-    </nav>
+    
+        </nav>
+
+<button id="themeToggle" class="theme-toggle"
+        aria-label="Toggle night mode">
+    🌙
+</button>
 
 </header>
 
@@ -507,6 +513,9 @@
 
         <button class="filter-btn" data-category="Workshop">Workshop</button>
 
+        <button class="filter-btn" data-category="Business">Business</button>
+        <button class="filter-btn" data-category="Art">Art</button>
+        <button class="filter-btn" data-category="Education">Education</button>
     </div>
 
 
@@ -718,6 +727,109 @@
 
         </article>
 
+         
+<!-- EVENT 7 -->
+
+<article class="event-card" data-category="Business">
+
+    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800"
+         alt="Business networking">
+
+    <div class="event-info">
+
+        <span class="category">BUSINESS</span>
+
+        <h3>Startup Networking Summit</h3>
+
+        <p class="event-details">
+            📅 15 December 2026<br>
+            📍 Bhubaneswar, Odisha
+        </p>
+
+        <div class="event-bottom">
+
+            <span class="price">₹899 onwards</span>
+
+            <a href="booking.html?event=Startup%20Networking%20Summit&price=899"
+               class="book-btn">
+                Book Tickets
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- EVENT 8 -->
+
+<article class="event-card" data-category="Art">
+
+    <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800"
+         alt="Art exhibition">
+
+    <div class="event-info">
+
+        <span class="category">ART</span>
+
+        <h3>Creative Arts Exhibition</h3>
+
+        <p class="event-details">
+            📅 18 December 2026<br>
+            📍 Bhubaneswar, Odisha
+        </p>
+
+        <div class="event-bottom">
+
+            <span class="price">₹299 onwards</span>
+
+            <a href="booking.html?event=Creative%20Arts%20Exhibition&price=299"
+               class="book-btn">
+                Book Tickets
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- EVENT 9 -->
+
+<article class="event-card" data-category="Education">
+
+    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800"
+         alt="Education seminar">
+
+    <div class="event-info">
+
+        <span class="category">EDUCATION</span>
+
+        <h3>Future Skills Education Expo</h3>
+
+        <p class="event-details">
+            📅 20 December 2026<br>
+            📍 KIIT University, Bhubaneswar
+        </p>
+
+        <div class="event-bottom">
+
+            <span class="price">₹199 onwards</span>
+
+            <a href="booking.html?event=Future%20Skills%20Education%20Expo&price=199"
+               class="book-btn">
+                Book Tickets
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
 
         <p class="no-results" id="noResults">
             No events found. Try another search.
@@ -726,6 +838,40 @@
     </div>
 
 </section>
+
+
+<!-- EVENT DETAILS POPUP -->
+
+<div class="event-modal" id="eventModal">
+
+    <div class="modal-content">
+
+        <button class="close-modal" id="closeModal">
+            &times;
+        </button>
+
+        <img id="modalImage" src="" alt="Event image">
+
+        <div class="modal-info">
+
+            <span class="category" id="modalCategory"></span>
+
+            <h2 id="modalTitle"></h2>
+
+            <p id="modalDetails"></p>
+
+            <h3 id="modalPrice"></h3>
+
+            <a href="#" id="modalBookBtn" class="book-btn">
+                Book Tickets
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 
 <!-- ABOUT / CTA -->
@@ -767,78 +913,251 @@
 
 <!-- SEARCH AND FILTER JAVASCRIPT -->
 
+
+<!-- DAY 3 JAVASCRIPT -->
+
 <script>
 
-    const searchInput = document.getElementById("eventSearch");
+// =================================
+// 1. NIGHT MODE / LIGHT MODE
+// =================================
 
-    const filterButtons = document.querySelectorAll(".filter-btn");
+const themeToggle = document.getElementById("themeToggle");
 
-    const eventCards = document.querySelectorAll(".event-card");
+// Load saved theme
 
-    const noResults = document.getElementById("noResults");
+const savedTheme = localStorage.getItem("eventora-theme");
 
-    let activeCategory = "All";
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+}
 
+// Update button icon
 
-    function filterEvents() {
+function updateThemeIcon() {
 
-        const searchText = searchInput.value.toLowerCase();
-
-        let visibleCount = 0;
-
-        eventCards.forEach(function(card) {
-
-            const category = card.dataset.category;
-
-            const content = card.textContent.toLowerCase();
-
-            const matchesCategory =
-                activeCategory === "All" ||
-                category === activeCategory;
-
-            const matchesSearch =
-                content.includes(searchText);
-
-            if (matchesCategory && matchesSearch) {
-
-                card.style.display = "block";
-
-                visibleCount++;
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-        noResults.style.display =
-            visibleCount === 0 ? "block" : "none";
-
+    if (document.body.classList.contains("dark-mode")) {
+        themeToggle.textContent = "☀️";
+    } else {
+        themeToggle.textContent = "🌙";
     }
 
+}
 
-    searchInput.addEventListener("input", filterEvents);
+updateThemeIcon();
+
+// Change theme
+
+themeToggle.addEventListener("click", function() {
+
+    document.body.classList.toggle("dark-mode");
+
+    const currentTheme =
+        document.body.classList.contains("dark-mode")
+        ? "dark"
+        : "light";
+
+    localStorage.setItem("eventora-theme", currentTheme);
+
+    updateThemeIcon();
+
+});
 
 
-    filterButtons.forEach(function(button) {
+// =================================
+// 2. SEARCH AND CATEGORY FILTER
+// =================================
 
-        button.addEventListener("click", function() {
+const searchInput =
+    document.getElementById("eventSearch");
 
-            filterButtons.forEach(function(btn) {
-                btn.classList.remove("active");
-            });
+const filterButtons =
+    document.querySelectorAll(".filter-btn");
 
-            button.classList.add("active");
+const eventCards =
+    document.querySelectorAll(".event-card");
 
-            activeCategory = button.dataset.category;
+const noResults =
+    document.getElementById("noResults");
 
-            filterEvents();
+let activeCategory = "All";
 
-        });
+
+function filterEvents() {
+
+    const searchText =
+        searchInput.value.toLowerCase().trim();
+
+    let visibleCount = 0;
+
+    eventCards.forEach(function(card) {
+
+        const category = card.dataset.category;
+
+        const content =
+            card.textContent.toLowerCase();
+
+        const matchesCategory =
+            activeCategory === "All" ||
+            category === activeCategory;
+
+        const matchesSearch =
+            content.includes(searchText);
+
+        if (matchesCategory && matchesSearch) {
+
+            card.style.display = "";
+
+            visibleCount++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
 
     });
+
+    noResults.style.display =
+        visibleCount === 0 ? "block" : "none";
+
+}
+
+
+// Search
+
+searchInput.addEventListener("input", filterEvents);
+
+
+// Category buttons
+
+filterButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        filterButtons.forEach(function(btn) {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        activeCategory = button.dataset.category;
+
+        filterEvents();
+
+    });
+
+});
+
+
+// =================================
+// 3. EVENT DETAILS POPUP
+// =================================
+
+const eventModal =
+    document.getElementById("eventModal");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+const modalImage =
+    document.getElementById("modalImage");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalCategory =
+    document.getElementById("modalCategory");
+
+const modalDetails =
+    document.getElementById("modalDetails");
+
+const modalPrice =
+    document.getElementById("modalPrice");
+
+const modalBookBtn =
+    document.getElementById("modalBookBtn");
+
+
+// Create View Details buttons
+
+eventCards.forEach(function(card) {
+
+    const detailsButton =
+        document.createElement("button");
+
+    detailsButton.textContent = "View Details";
+
+    detailsButton.className = "details-btn";
+
+    card.querySelector(".event-bottom")
+        .prepend(detailsButton);
+
+
+    // Open popup
+
+    detailsButton.addEventListener("click", function() {
+
+        modalTitle.textContent =
+            card.querySelector("h3").textContent;
+
+        modalCategory.textContent =
+            card.querySelector(".category").textContent;
+
+        modalDetails.textContent =
+            card.querySelector(".event-details").innerText;
+
+        modalPrice.textContent =
+            card.querySelector(".price").textContent;
+
+        modalImage.src =
+            card.querySelector("img").src;
+
+        modalImage.alt = modalTitle.textContent;
+
+        modalBookBtn.href =
+            card.querySelector(".book-btn").href;
+
+        eventModal.style.display = "flex";
+
+    });
+
+});
+
+
+// =================================
+// 4. CLOSE POPUP
+// =================================
+
+function hideModal() {
+
+    eventModal.style.display = "none";
+
+}
+
+closeModal.addEventListener("click", hideModal);
+
+
+// Close by clicking outside
+
+eventModal.addEventListener("click", function(event) {
+
+    if (event.target === eventModal) {
+        hideModal();
+    }
+
+});
+
+
+// Close using Escape key
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        hideModal();
+    }
+
+});
 
 </script>
 
