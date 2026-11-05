@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventora | Book Your Tickets</title>
+    <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="logo">Event<span>ora.</span></a>
+    <a href="index.html" class="back-link">← Back to Events</a>
+</header>
+
+<main class="container">
+
+    <section class="heading">
+        <span class="eyebrow">YOUR EXPERIENCE STARTS HERE</span>
+        <h1>Book Your <span>Tickets</span></h1>
+        <p>Choose your tickets, complete your booking and get ready!</p>
+    </section>
+
+    <div class="booking-layout">
+
+        <section class="booking-form">
+
+            <div class="panel">
+                <div class="section-title">
+                    <span class="number">01</span>
+                    <div>
+                        <h2>Select Tickets</h2>
+                        <p>Choose your preferred experience.</p>
+                    </div>
+                </div>
+
+                <div class="ticket-option">
+                    <label>
+                        <input type="radio" name="ticket" value="General" checked>
+                        <span>
+                            <strong>General Admission</strong>
+                            <small>Standard event entry</small>
+                        </span>
+                    </label>
+                    <strong id="generalPrice">₹499</strong>
+                </div>
+
+                <div class="ticket-option">
+                    <label>
+                        <input type="radio" name="ticket" value="VIP">
+                        <span>
+                            <strong>VIP Pass</strong>
+                            <small>Premium seating experience</small>
+                        </span>
+                    </label>
+                    <strong id="vipPrice">₹999</strong>
+                </div>
+
+                <div class="ticket-option">
+                    <label>
+                        <input type="radio" name="ticket" value="Premium">
+                        <span>
+                            <strong>Premium Pass</strong>
+                            <small>Exclusive premium experience</small>
+                        </span>
+                    </label>
+                    <strong id="premiumPrice">₹1,499</strong>
+                </div>
+
+                <div class="quantity">
+                    <span>Number of tickets</span>
+                    <div class="quantity-control">
+                        <button type="button" id="minus">−</button>
+                        <strong id="quantity">1</strong>
+                        <button type="button" id="plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="section-title">
+                    <span class="number">02</span>
+                    <div>
+                        <h2>Customer Details</h2>
+                        <p>Where should we send your ticket?</p>
+                    </div>
+                </div>
+
+                <label class="field-label">Full Name</label>
+                <input id="customerName" type="text"
+                       placeholder="Enter your full name" required>
+
+                <label class="field-label">Email Address</label>
+                <input id="customerEmail" type="email"
+                       placeholder="example@email.com" required>
+
+                <label class="field-label">Mobile Number</label>
+                <input id="customerPhone" type="tel"
+                       placeholder="10-digit mobile number"
+                       maxlength="10" required>
+            </div>
+
+            <div class="panel">
+                <div class="section-title">
+                    <span class="number">03</span>
+                    <div>
+                        <h2>Payment Method</h2>
+                        <p>Choose your preferred payment option.</p>
+                    </div>
+                </div>
+
+                <div class="payment-options">
+
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="UPI" checked>
+                        <span class="payment-icon">📱</span>
+                        <span>
+                            <strong>UPI Payment</strong>
+                            <small>Google Pay, PhonePe, Paytm</small>
+                        </span>
+                    </label>
+
+                    <label class="payment-card">
+                        <input type="radio" name="payment" value="Card">
+                        <span class="payment-icon">💳</span>
+                        <span>
+                            <strong>Credit / Debit Card</strong>
+                            <small>Visa, Mastercard, RuPay</small>
+                        </span>
+                    </label>
+
+                </div>
+
+                <div class="demo-notice">
+                    This is a demonstration checkout.
+                    No real payment will be made.
+                    Never enter real card or UPI credentials.
+                </div>
+            </div>
+
+            <button type="button" class="pay-button" id="payButton">
+                Complete Demo Booking →
+            </button>
+
+        </section>
+
+        <aside class="summary panel">
+
+            <span class="eyebrow">BOOKING SUMMARY</span>
+            <h2>Your Order</h2>
+
+            <div class="event-summary">
+                <div class="event-art">🎉</div>
+                <div>
+                    <h3 id="eventName">Eventora Special Event</h3>
+                    <p>Digital Event Ticket</p>
+                </div>
+            </div>
+
+            <div class="summary-row">
+                <span>Ticket type</span>
+                <strong id="summaryType">General</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Quantity</span>
+                <strong id="summaryQuantity">1</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Ticket price</span>
+                <strong id="summaryPrice">₹499</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Booking fee</span>
+                <strong id="bookingFee">₹20</strong>
+            </div>
+
+            <div class="total-row">
+                <span>Total Amount</span>
+                <strong id="totalAmount">₹519</strong>
+            </div>
+
+            <p class="secure-note">🔒 Secure demo booking experience</p>
+        </aside>
+
+    </div>
+
+    <!-- SUCCESS TICKET -->
+    <section id="successSection" class="success-section" hidden>
+
+        <div class="success-icon">✓</div>
+
+        <span class="eyebrow">BOOKING CONFIRMED</span>
+        <h1>Your Ticket is <span>Ready!</span></h1>
+        <p>Your demo booking has been successfully completed.</p>
+
+        <div class="digital-ticket" id="printTicket">
+
+            <div class="ticket-header">
+                <div>
+                    <span class="eyebrow">EVENTORA DIGITAL PASS</span>
+                    <h2 id="ticketEvent">Your Event</h2>
+                </div>
+                <span class="confirmed">CONFIRMED</span>
+            </div>
+
+            <div class="ticket-details">
+                <div>
+                    <small>BOOKING ID</small>
+                    <strong id="bookingId"></strong>
+                </div>
+                <div>
+                    <small>ATTENDEE</small>
+                    <strong id="ticketName"></strong>
+                </div>
+                <div>
+                    <small>TICKET TYPE</small>
+                    <strong id="ticketType"></strong>
+                </div>
+                <div>
+                    <small>QUANTITY</small>
+                    <strong id="ticketQuantity"></strong>
+                </div>
+                <div>
+                    <small>PAYMENT</small>
+                    <strong id="ticketPayment"></strong>
+                </div>
+                <div>
+                    <small>AMOUNT</small>
+                    <strong id="ticketAmount"></strong>
+                </div>
+            </div>
+
+            <div class="qr-area">
+                <div id="qrcode"></div>
+                <p>Scan your QR code to verify this demo ticket.</p>
+            </div>
+
+            <div class="ticket-footer">
+                <span>Thank you for choosing Eventora!</span>
+                <span>Have an amazing experience.</span>
+            </div>
+
+        </div>
+
+        <button type="button" class="pay-button" id="downloadButton">
+            Download / Print Ticket
+        </button>
+
+        <a href="index.html" class="home-link">← Back to Homepage</a>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 Eventora. Made for memorable experiences.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/booking.js"></script>
+
+</body>
+</html>
