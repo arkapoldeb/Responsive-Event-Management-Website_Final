@@ -1,410 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Eventora | Discover Events & Book Tickets</title>
-
     <link rel="stylesheet" href="css/style.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8f7fc;
-            color: #201b35;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 12px #0000000d;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            color: #7045e8;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #302a43;
-            font-weight: 600;
-        }
-
-        .nav-links a:hover {
-            color: #7045e8;
-        }
-
-        .nav-button {
-            background: #7045e8;
-            color: white !important;
-            padding: 12px 20px;
-            border-radius: 9px;
-        }
-
-        .hero {
-            min-height: 470px;
-            padding: 90px 8%;
-            display: flex;
-            align-items: center;
-            background:
-                linear-gradient(90deg,
-                rgba(32,20,70,.94),
-                rgba(80,43,160,.72)),
-                url("https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1600")
-                center/cover;
-            color: white;
-        }
-
-        .hero-content {
-            max-width: 650px;
-            animation: fadeUp 1s ease;
-        }
-
-        .hero-label {
-            color: #ffd36a;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        .hero h1 {
-            font-size: clamp(38px, 6vw, 65px);
-            margin: 20px 0;
-            line-height: 1.1;
-        }
-
-        .hero p {
-            font-size: 17px;
-            line-height: 1.7;
-            margin-bottom: 28px;
-            color: #eee8ff;
-        }
-
-        .hero-button {
-            display: inline-block;
-            background: linear-gradient(90deg,#ff7a45,#ed3d94);
-            padding: 15px 28px;
-            border-radius: 10px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: .3s;
-        }
-
-        .hero-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px #ed3d9460;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            gap: 20px;
-            padding: 35px 8%;
-            background: white;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat h2 {
-            color: #7045e8;
-            font-size: 28px;
-            margin-bottom: 6px;
-        }
-
-        .stat p {
-            color: #777;
-            font-size: 13px;
-        }
-
-        .events-section {
-            padding: 75px 8%;
-        }
-
-        .section-heading {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .section-heading span {
-            color: #7045e8;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        .section-heading h2 {
-            font-size: 36px;
-            margin: 12px 0;
-        }
-
-        .section-heading p {
-            color: #777;
-        }
-
-        .filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .filter-btn {
-            border: 1px solid #ddd5f4;
-            background: white;
-            padding: 11px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: #7045e8;
-            color: white;
-            border-color: #7045e8;
-        }
-
-        .search-box {
-            display: block;
-            width: min(100%, 420px);
-            margin: 0 auto 35px;
-            padding: 14px 18px;
-            border: 1px solid #ddd5f4;
-            border-radius: 10px;
-            font-size: 15px;
-            outline: none;
-        }
-
-        .search-box:focus {
-            border-color: #7045e8;
-        }
-
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            gap: 25px;
-        }
-
-        .event-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 25px #0000000b;
-            transition: .3s;
-        }
-
-        .event-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px #7045e825;
-        }
-
-        .event-card img {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .event-info {
-            padding: 20px;
-        }
-
-        .category {
-            color: #7045e8;
-            background: #f0ebff;
-            display: inline-block;
-            padding: 6px 11px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .event-info h3 {
-            margin: 13px 0 10px;
-            font-size: 19px;
-        }
-
-        .event-details {
-            color: #777;
-            font-size: 13px;
-            line-height: 2;
-        }
-
-        .event-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 18px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            gap: 8px;
-        }
-
-        .price {
-            color: #7045e8;
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .book-btn {
-            text-decoration: none;
-            background: #7045e8;
-            color: white;
-            padding: 11px 15px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: bold;
-            transition: .3s;
-        }
-
-        .book-btn:hover {
-            background: #ed3d94;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 30px;
-            color: #777;
-            display: none;
-            grid-column: 1/-1;
-        }
-
-        .cta {
-            text-align: center;
-            padding: 65px 20px;
-            background: linear-gradient(120deg,#372078,#7045e8,#d94c9c);
-            color: white;
-        }
-
-        .cta h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        .cta p {
-            margin-bottom: 25px;
-        }
-
-        footer {
-            background: #17142a;
-            color: white;
-            text-align: center;
-            padding: 28px;
-        }
-
-        footer p {
-            font-size: 13px;
-            color: #c8c2dc;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media(max-width:900px) {
-            .events-grid {
-                grid-template-columns: repeat(2,1fr);
-            }
-
-            .nav-links {
-                gap: 14px;
-            }
-        }
-
-        @media(max-width:600px) {
-            .navbar {
-                flex-wrap: wrap;
-                gap: 16px;
-                padding: 16px 5%;
-            }
-
-            .nav-links {
-                width: 100%;
-                justify-content: space-between;
-                gap: 8px;
-                font-size: 12px;
-            }
-
-            .nav-button {
-                padding: 8px 10px;
-            }
-
-            .hero {
-                padding: 65px 6%;
-                min-height: 400px;
-            }
-
-            .stats {
-                padding: 25px 5%;
-                gap: 8px;
-            }
-
-            .stat h2 {
-                font-size: 21px;
-            }
-
-            .stat p {
-                font-size: 10px;
-            }
-
-            .events-section {
-                padding: 50px 5%;
-            }
-
-            .events-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-heading h2 {
-                font-size: 28px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION BAR -->
-
+<!-- NAVIGATION -->
 <header class="navbar">
-
     <a href="index.html" class="logo">Eventora.</a>
 
     <nav>
@@ -414,24 +20,21 @@
             <li><a href="#about">About</a></li>
             <li><a href="booking.html" class="nav-button">Book Tickets</a></li>
         </ul>
-    
-        </nav>
+    </nav>
 
-<button id="themeToggle" class="theme-toggle"
-        aria-label="Toggle night mode">
-    🌙
-</button>
-
+    <button id="themeToggle" class="theme-toggle">
+        🌙
+    </button>
 </header>
 
+<main>
 
 <!-- HERO SECTION -->
-
 <section class="hero" id="home">
-
     <div class="hero-content">
-
-        <span class="hero-label">DISCOVER. EXPERIENCE. CELEBRATE.</span>
+        <span class="hero-label">
+            DISCOVER. EXPERIENCE. CELEBRATE.
+        </span>
 
         <h1>Make Every Moment An Experience.</h1>
 
@@ -444,16 +47,11 @@
         <a href="#events" class="hero-button">
             Explore Events →
         </a>
-
     </div>
-
 </section>
 
-
 <!-- STATISTICS -->
-
 <section class="stats">
-
     <div class="stat">
         <h2>50+</h2>
         <p>Upcoming Events</p>
@@ -468,27 +66,100 @@
         <h2>100%</h2>
         <p>Memorable Experiences</p>
     </div>
+</section>
+
+
+<!-- DAY 4: FEATURED EVENT -->
+<section class="featured-section">
+
+    <div class="featured-card">
+
+        <div class="featured-image">
+            <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1000"
+                 alt="Live music festival">
+
+            <span class="featured-tag">
+                ⭐ FEATURED EVENT
+            </span>
+        </div>
+
+        <div class="featured-content">
+
+            <span class="eyebrow">
+                EVENTORA SPOTLIGHT
+            </span>
+
+            <h2>Live Music Festival 2026</h2>
+
+            <p>
+                Get ready for an unforgettable evening of live
+                performances, great music and amazing memories.
+            </p>
+
+            <p class="featured-meta">
+                📅 15 November 2026<br>
+                📍 Bhubaneswar, Odisha
+            </p>
+
+            <!-- COUNTDOWN TIMER -->
+            <div class="countdown-wrap">
+
+                <h4>EVENT STARTS IN</h4>
+
+                <div class="countdown">
+
+                    <div>
+                        <strong id="days">00</strong>
+                        <span>Days</span>
+                    </div>
+
+                    <div>
+                        <strong id="hours">00</strong>
+                        <span>Hours</span>
+                    </div>
+
+                    <div>
+                        <strong id="minutes">00</strong>
+                        <span>Minutes</span>
+                    </div>
+
+                    <div>
+                        <strong id="seconds">00</strong>
+                        <span>Seconds</span>
+                    </div>
+
+                </div>
+
+                <p id="countdownMessage"></p>
+
+            </div>
+
+            <a href="booking.html?event=Live%20Music%20Festival&price=499"
+               class="hero-button">
+                Book Featured Event →
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
 
 
 <!-- EVENTS SECTION -->
-
 <section class="events-section" id="events">
 
     <div class="section-heading">
-
         <span>FIND YOUR NEXT EXPERIENCE</span>
 
         <h2>Explore Upcoming Events</h2>
 
-        <p>Choose your favourite event and reserve your tickets.</p>
-
+        <p>
+            Choose your favourite event and reserve your tickets.
+        </p>
     </div>
 
-
     <!-- SEARCH -->
-
     <input
         type="text"
         id="eventSearch"
@@ -496,43 +167,59 @@
         placeholder="🔍 Search events..."
     >
 
-
     <!-- CATEGORY FILTER -->
-
     <div class="filters">
 
-        <button class="filter-btn active" data-category="All">All Events</button>
+        <button class="filter-btn active" data-category="All">
+            All Events
+        </button>
 
-        <button class="filter-btn" data-category="Music">Music</button>
+        <button class="filter-btn" data-category="Music">
+            Music
+        </button>
 
-        <button class="filter-btn" data-category="Technology">Technology</button>
+        <button class="filter-btn" data-category="Technology">
+            Technology
+        </button>
 
-        <button class="filter-btn" data-category="Food">Food</button>
+        <button class="filter-btn" data-category="Food">
+            Food
+        </button>
 
-        <button class="filter-btn" data-category="Sports">Sports</button>
+        <button class="filter-btn" data-category="Sports">
+            Sports
+        </button>
 
-        <button class="filter-btn" data-category="Workshop">Workshop</button>
+        <button class="filter-btn" data-category="Workshop">
+            Workshop
+        </button>
 
-        <button class="filter-btn" data-category="Business">Business</button>
-        <button class="filter-btn" data-category="Art">Art</button>
-        <button class="filter-btn" data-category="Education">Education</button>
+        <button class="filter-btn" data-category="Business">
+            Business
+        </button>
+
+        <button class="filter-btn" data-category="Art">
+            Art
+        </button>
+
+        <button class="filter-btn" data-category="Education">
+            Education
+        </button>
+
     </div>
 
 
     <!-- EVENT CARDS -->
-
     <div class="events-grid" id="eventsGrid">
 
 
         <!-- EVENT 1 -->
-
         <article class="event-card" data-category="Music">
 
             <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800"
                  alt="Music concert">
 
             <div class="event-info">
-
                 <span class="category">MUSIC</span>
 
                 <h3>Live Music Festival</h3>
@@ -543,30 +230,24 @@
                 </p>
 
                 <div class="event-bottom">
-
                     <span class="price">₹499 onwards</span>
 
                     <a href="booking.html?event=Live%20Music%20Festival&price=499"
                        class="book-btn">
                         Book Tickets
                     </a>
-
                 </div>
-
             </div>
-
         </article>
 
 
         <!-- EVENT 2 -->
-
         <article class="event-card" data-category="Technology">
 
             <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"
                  alt="Technology conference">
 
             <div class="event-info">
-
                 <span class="category">TECHNOLOGY</span>
 
                 <h3>Tech Innovation Summit</h3>
@@ -577,271 +258,275 @@
                 </p>
 
                 <div class="event-bottom">
-
                     <span class="price">₹799 onwards</span>
 
                     <a href="booking.html?event=Tech%20Innovation%20Summit&price=799"
                        class="book-btn">
                         Book Tickets
                     </a>
-
                 </div>
-
             </div>
-
         </article>
 
 
         <!-- EVENT 3 -->
-
         <article class="event-card" data-category="Food">
 
             <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800"
                  alt="Food festival">
 
             <div class="event-info">
-
                 <span class="category">FOOD</span>
 
                 <h3>Street Food Carnival</h3>
 
                 <p class="event-details">
                     📅 25 November 2026<br>
-                    📍 Bhubaneswar, Odisha
+                    📍 Kolkata
                 </p>
 
                 <div class="event-bottom">
-
                     <span class="price">₹399 onwards</span>
 
                     <a href="booking.html?event=Street%20Food%20Carnival&price=399"
                        class="book-btn">
                         Book Tickets
                     </a>
-
                 </div>
-
             </div>
-
         </article>
 
 
         <!-- EVENT 4 -->
-
         <article class="event-card" data-category="Sports">
 
             <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800"
                  alt="Sports marathon">
 
             <div class="event-info">
-
                 <span class="category">SPORTS</span>
 
                 <h3>City Marathon 2026</h3>
 
                 <p class="event-details">
                     📅 30 November 2026<br>
-                    📍 Bhubaneswar, Odisha
+                    📍 Cuttack, Odisha
                 </p>
 
                 <div class="event-bottom">
-
                     <span class="price">₹299 onwards</span>
 
                     <a href="booking.html?event=City%20Marathon%202026&price=299"
                        class="book-btn">
                         Book Tickets
                     </a>
-
                 </div>
-
             </div>
-
         </article>
 
 
         <!-- EVENT 5 -->
-
         <article class="event-card" data-category="Workshop">
 
             <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800"
                  alt="Coding workshop">
 
             <div class="event-info">
-
                 <span class="category">WORKSHOP</span>
 
                 <h3>Full Stack Coding Bootcamp</h3>
 
                 <p class="event-details">
                     📅 5 December 2026<br>
-                    📍 KIIT University, Bhubaneswar
+                    📍 Mumbai, Maharashtra
                 </p>
 
                 <div class="event-bottom">
+                    <span class="price">₹499 onwards</span>
 
-                    <span class="price">₹599 onwards</span>
-
-                    <a href="booking.html?event=Full%20Stack%20Coding%20Bootcamp&price=599"
+                    <a href="booking.html?event=Full%20Stack%20Coding%20Bootcamp&price=499"
                        class="book-btn">
                         Book Tickets
                     </a>
-
                 </div>
-
             </div>
-
         </article>
 
 
         <!-- EVENT 6 -->
-
         <article class="event-card" data-category="Music">
 
             <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800"
                  alt="DJ night">
 
             <div class="event-info">
-
                 <span class="category">MUSIC</span>
 
                 <h3>DJ Night Experience</h3>
 
                 <p class="event-details">
                     📅 10 December 2026<br>
-                    📍 Bhubaneswar, Odisha
+                    📍 Delhi
                 </p>
 
                 <div class="event-bottom">
+                    <span class="price">₹599 onwards</span>
 
-                    <span class="price">₹699 onwards</span>
-
-                    <a href="booking.html?event=DJ%20Night%20Experience&price=699"
+                    <a href="booking.html?event=DJ%20Night%20Experience&price=599"
                        class="book-btn">
                         Book Tickets
                     </a>
-
                 </div>
-
             </div>
-
         </article>
 
-         
-<!-- EVENT 7 -->
 
-<article class="event-card" data-category="Business">
+        <!-- EVENT 7 -->
+        <article class="event-card" data-category="Business">
 
-    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800"
-         alt="Business networking">
+            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800"
+                 alt="Business networking">
 
-    <div class="event-info">
+            <div class="event-info">
+                <span class="category">BUSINESS</span>
 
-        <span class="category">BUSINESS</span>
+                <h3>Startup Networking Summit</h3>
 
-        <h3>Startup Networking Summit</h3>
+                <p class="event-details">
+                    📅 15 December 2026<br>
+                    📍 Chennai, Tamil Nadu
+                </p>
 
-        <p class="event-details">
-            📅 15 December 2026<br>
-            📍 Bhubaneswar, Odisha
-        </p>
+                <div class="event-bottom">
+                    <span class="price">₹699 onwards</span>
 
-        <div class="event-bottom">
-
-            <span class="price">₹899 onwards</span>
-
-            <a href="booking.html?event=Startup%20Networking%20Summit&price=899"
-               class="book-btn">
-                Book Tickets
-            </a>
-
-        </div>
-
-    </div>
-
-</article>
+                    <a href="booking.html?event=Startup%20Networking%20Summit&price=699"
+                       class="book-btn">
+                        Book Tickets
+                    </a>
+                </div>
+            </div>
+        </article>
 
 
-<!-- EVENT 8 -->
+        <!-- EVENT 8 -->
+        <article class="event-card" data-category="Art">
 
-<article class="event-card" data-category="Art">
+            <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800"
+                 alt="Art exhibition">
 
-    <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800"
-         alt="Art exhibition">
+            <div class="event-info">
+                <span class="category">ART</span>
 
-    <div class="event-info">
+                <h3>Creative Arts Exhibition</h3>
 
-        <span class="category">ART</span>
+                <p class="event-details">
+                    📅 18 December 2026<br>
+                    📍 Hyderabad, Telangana
+                </p>
 
-        <h3>Creative Arts Exhibition</h3>
+                <div class="event-bottom">
+                    <span class="price">₹299 onwards</span>
 
-        <p class="event-details">
-            📅 18 December 2026<br>
-            📍 Bhubaneswar, Odisha
-        </p>
-
-        <div class="event-bottom">
-
-            <span class="price">₹299 onwards</span>
-
-            <a href="booking.html?event=Creative%20Arts%20Exhibition&price=299"
-               class="book-btn">
-                Book Tickets
-            </a>
-
-        </div>
-
-    </div>
-
-</article>
+                    <a href="booking.html?event=Creative%20Arts%20Exhibition&price=299"
+                       class="book-btn">
+                        Book Tickets
+                    </a>
+                </div>
+            </div>
+        </article>
 
 
-<!-- EVENT 9 -->
+        <!-- EVENT 9 -->
+        <article class="event-card" data-category="Education">
 
-<article class="event-card" data-category="Education">
+            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800"
+                 alt="Education seminar">
 
-    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800"
-         alt="Education seminar">
+            <div class="event-info">
+                <span class="category">EDUCATION</span>
 
-    <div class="event-info">
+                <h3>Future Skills Education Expo</h3>
 
-        <span class="category">EDUCATION</span>
+                <p class="event-details">
+                    📅 20 December 2026<br>
+                    📍 KIIT University, Bhubaneswar
+                </p>
 
-        <h3>Future Skills Education Expo</h3>
+                <div class="event-bottom">
+                    <span class="price">₹199 onwards</span>
 
-        <p class="event-details">
-            📅 20 December 2026<br>
-            📍 KIIT University, Bhubaneswar
-        </p>
-
-        <div class="event-bottom">
-
-            <span class="price">₹199 onwards</span>
-
-            <a href="booking.html?event=Future%20Skills%20Education%20Expo&price=199"
-               class="book-btn">
-                Book Tickets
-            </a>
-
-        </div>
-
-    </div>
-
-</article>
-
-
+                    <a href="booking.html?event=Future%20Skills%20Education%20Expo&price=199"
+                       class="book-btn">
+                        Book Tickets
+                    </a>
+                </div>
+            </div>
+        </article>
 
         <p class="no-results" id="noResults">
             No events found. Try another search.
         </p>
 
     </div>
+</section>
+
+
+<!-- DAY 4: REGISTRATION BANNER -->
+<section class="registration-banner">
+
+    <div>
+        <span class="eyebrow">JOIN EVENTORA</span>
+
+        <h2>Never Miss an Experience</h2>
+
+        <p>
+            Register your interest and stay connected
+            with upcoming events.
+        </p>
+    </div>
+
+    <button class="hero-button" id="openRegister">
+        Quick Register
+    </button>
 
 </section>
 
 
-<!-- EVENT DETAILS POPUP -->
+<!-- ABOUT / CTA -->
+<section class="cta" id="about">
 
+    <h2>Make Your Next Memory With Eventora</h2>
+
+    <p>
+        Find your favourite events, book your tickets
+        and enjoy unforgettable moments.
+    </p>
+
+    <a href="#events" class="hero-button">
+        Discover Events →
+    </a>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <a href="index.html" class="logo footer-logo">
+        Eventora.
+    </a>
+
+    <p>© 2026 Eventora. All Rights Reserved.</p>
+
+    <p>Discover. Book. Experience.</p>
+
+</footer>
+
+
+<!-- EVENT DETAILS POPUP -->
 <div class="event-modal" id="eventModal">
 
     <div class="modal-content">
@@ -867,64 +552,82 @@
             </a>
 
         </div>
-
     </div>
-
 </div>
 
 
+<!-- DAY 4: REGISTRATION POPUP -->
+<div class="event-modal" id="registrationModal">
 
-<!-- ABOUT / CTA -->
+    <div class="registration-box">
 
-<section class="cta" id="about">
+        <button class="close-modal" id="closeRegister">
+            &times;
+        </button>
 
-    <h2>Make Your Next Memory With Eventora</h2>
+        <span class="eyebrow">EVENTORA MEMBERSHIP</span>
 
-    <p>
-        Find your favourite events, book your tickets
-        and enjoy unforgettable moments.
-    </p>
+        <h2>Quick Registration</h2>
 
-    <a href="#events" class="hero-button">
-        Discover Events →
-    </a>
+        <p class="form-intro">
+            Enter your details to register your interest.
+        </p>
 
-</section>
+        <form id="registrationForm">
+
+            <label for="regName">Full Name</label>
+
+            <input
+                type="text"
+                id="regName"
+                placeholder="Enter your full name"
+                minlength="2"
+                required
+            >
+
+            <label for="regEmail">Email Address</label>
+
+            <input
+                type="email"
+                id="regEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="regPhone">Phone Number</label>
+
+            <input
+                type="tel"
+                id="regPhone"
+                placeholder="10-digit phone number"
+                pattern="[0-9]{10}"
+                required
+            >
+
+            <button type="submit" class="submit-btn">
+                Submit Registration
+            </button>
+
+            <p id="registrationMessage" class="form-message"></p>
+
+        </form>
+
+        <p class="demo-note">
+            Demo registration only. No information is sent to a server.
+        </p>
+
+    </div>
+</div>
 
 
-<!-- FOOTER -->
-
-<footer>
-
-    <a href="index.html" class="logo" style="color:white;">
-        Eventora.
-    </a>
-
-    <p style="margin-top:12px;">
-        © 2026 Eventora. All Rights Reserved.
-    </p>
-
-    <p style="margin-top:8px;">
-        Discover. Book. Experience.
-    </p>
-
-</footer>
-
-
-<!-- SEARCH AND FILTER JAVASCRIPT -->
-
-
-<!-- DAY 3 JAVASCRIPT -->
-
+<!-- JAVASCRIPT -->
 <script>
 
-// =================================
-// 1. NIGHT MODE / LIGHT MODE
-// =================================
+// ======================================
+// 1. DARK MODE / LIGHT MODE
+// ======================================
 
 const themeToggle = document.getElementById("themeToggle");
-
-// Load saved theme
 
 const savedTheme = localStorage.getItem("eventora-theme");
 
@@ -932,21 +635,16 @@ if (savedTheme === "dark") {
     document.body.classList.add("dark-mode");
 }
 
-// Update button icon
-
 function updateThemeIcon() {
 
-    if (document.body.classList.contains("dark-mode")) {
-        themeToggle.textContent = "☀️";
-    } else {
-        themeToggle.textContent = "🌙";
-    }
+    themeToggle.textContent =
+        document.body.classList.contains("dark-mode")
+        ? "☀️"
+        : "🌙";
 
 }
 
 updateThemeIcon();
-
-// Change theme
 
 themeToggle.addEventListener("click", function() {
 
@@ -964,24 +662,19 @@ themeToggle.addEventListener("click", function() {
 });
 
 
-// =================================
+// ======================================
 // 2. SEARCH AND CATEGORY FILTER
-// =================================
+// ======================================
 
-const searchInput =
-    document.getElementById("eventSearch");
+const searchInput = document.getElementById("eventSearch");
 
-const filterButtons =
-    document.querySelectorAll(".filter-btn");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
-const eventCards =
-    document.querySelectorAll(".event-card");
+const eventCards = document.querySelectorAll(".event-card");
 
-const noResults =
-    document.getElementById("noResults");
+const noResults = document.getElementById("noResults");
 
 let activeCategory = "All";
-
 
 function filterEvents() {
 
@@ -994,8 +687,7 @@ function filterEvents() {
 
         const category = card.dataset.category;
 
-        const content =
-            card.textContent.toLowerCase();
+        const content = card.textContent.toLowerCase();
 
         const matchesCategory =
             activeCategory === "All" ||
@@ -1004,16 +696,12 @@ function filterEvents() {
         const matchesSearch =
             content.includes(searchText);
 
-        if (matchesCategory && matchesSearch) {
+        const visible = matchesCategory && matchesSearch;
 
-            card.style.display = "";
+        card.hidden = !visible;
 
+        if (visible) {
             visibleCount++;
-
-        } else {
-
-            card.style.display = "none";
-
         }
 
     });
@@ -1023,13 +711,7 @@ function filterEvents() {
 
 }
 
-
-// Search
-
 searchInput.addEventListener("input", filterEvents);
-
-
-// Category buttons
 
 filterButtons.forEach(function(button) {
 
@@ -1050,51 +732,38 @@ filterButtons.forEach(function(button) {
 });
 
 
-// =================================
+// ======================================
 // 3. EVENT DETAILS POPUP
-// =================================
+// ======================================
 
-const eventModal =
-    document.getElementById("eventModal");
+const eventModal = document.getElementById("eventModal");
 
-const closeModal =
-    document.getElementById("closeModal");
+const closeModal = document.getElementById("closeModal");
 
-const modalImage =
-    document.getElementById("modalImage");
+const modalImage = document.getElementById("modalImage");
 
-const modalTitle =
-    document.getElementById("modalTitle");
+const modalTitle = document.getElementById("modalTitle");
 
-const modalCategory =
-    document.getElementById("modalCategory");
+const modalCategory = document.getElementById("modalCategory");
 
-const modalDetails =
-    document.getElementById("modalDetails");
+const modalDetails = document.getElementById("modalDetails");
 
-const modalPrice =
-    document.getElementById("modalPrice");
+const modalPrice = document.getElementById("modalPrice");
 
-const modalBookBtn =
-    document.getElementById("modalBookBtn");
+const modalBookBtn = document.getElementById("modalBookBtn");
 
-
-// Create View Details buttons
 
 eventCards.forEach(function(card) {
 
-    const detailsButton =
-        document.createElement("button");
+    const detailsButton = document.createElement("button");
 
     detailsButton.textContent = "View Details";
 
     detailsButton.className = "details-btn";
 
-    card.querySelector(".event-bottom")
-        .prepend(detailsButton);
+    detailsButton.type = "button";
 
-
-    // Open popup
+    card.querySelector(".event-bottom").prepend(detailsButton);
 
     detailsButton.addEventListener("click", function() {
 
@@ -1124,21 +793,11 @@ eventCards.forEach(function(card) {
 
 });
 
-
-// =================================
-// 4. CLOSE POPUP
-// =================================
-
 function hideModal() {
-
     eventModal.style.display = "none";
-
 }
 
 closeModal.addEventListener("click", hideModal);
-
-
-// Close by clicking outside
 
 eventModal.addEventListener("click", function(event) {
 
@@ -1149,12 +808,154 @@ eventModal.addEventListener("click", function(event) {
 });
 
 
-// Close using Escape key
+// ======================================
+// 4. DAY 4: COUNTDOWN TIMER
+// ======================================
+
+// Target event date: 15 November 2026, 6 PM
+
+const eventDate =
+    new Date("November 15, 2026 18:00:00").getTime();
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+
+    const difference = eventDate - now;
+
+    if (difference <= 0) {
+
+        ["days", "hours", "minutes", "seconds"].forEach(function(id) {
+            document.getElementById(id).textContent = "00";
+        });
+
+        document.getElementById("countdownMessage").textContent =
+            "The featured event has started!";
+
+        return;
+    }
+
+    const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+    );
+
+    const minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+    );
+
+    const seconds = Math.floor(
+        (difference / 1000) % 60
+    );
+
+    document.getElementById("days").textContent =
+        String(days).padStart(2, "0");
+
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+// ======================================
+// 5. DAY 4: REGISTRATION POPUP
+// ======================================
+
+const registrationModal =
+    document.getElementById("registrationModal");
+
+const openRegister =
+    document.getElementById("openRegister");
+
+const closeRegister =
+    document.getElementById("closeRegister");
+
+const registrationForm =
+    document.getElementById("registrationForm");
+
+const registrationMessage =
+    document.getElementById("registrationMessage");
+
+
+// Open registration
+
+openRegister.addEventListener("click", function() {
+
+    registrationModal.style.display = "flex";
+
+});
+
+
+// Close registration
+
+function hideRegistrationModal() {
+
+    registrationModal.style.display = "none";
+
+}
+
+closeRegister.addEventListener("click", hideRegistrationModal);
+
+
+// Click outside to close
+
+registrationModal.addEventListener("click", function(event) {
+
+    if (event.target === registrationModal) {
+        hideRegistrationModal();
+    }
+
+});
+
+
+// Form submission
+
+registrationForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    if (!registrationForm.checkValidity()) {
+        registrationForm.reportValidity();
+        return;
+    }
+
+    const name =
+        document.getElementById("regName").value.trim();
+
+    registrationMessage.textContent =
+        "Thank you, " + name +
+        "! Your demo registration was successful.";
+
+    registrationForm.reset();
+
+});
+
+
+// ======================================
+// 6. CLOSE POPUPS USING ESCAPE
+// ======================================
 
 document.addEventListener("keydown", function(event) {
 
     if (event.key === "Escape") {
+
         hideModal();
+
+        hideRegistrationModal();
+
     }
 
 });
